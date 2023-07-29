@@ -1,0 +1,8 @@
+{
+    "commit": false,
+    "access": "public",
+    "baseBranch": "main",
+    "ignore": ["@example/app-route", "@next-org/adapter-test"],
+    "updateInternalDependencies": "minor",
+    "changelog": ["@changesets/changelog-github", { "repo": "bekacru/next-org" }]
+}

@@ -1,0 +1,4 @@
+{
+  "extends": "@next-org/tsconfig/tsconfig.base.json",
+  "include": ["src"]
+}

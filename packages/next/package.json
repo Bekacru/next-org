@@ -1,0 +1,39 @@
+{
+    "name": "@next-org/next",
+    "version": "0.1.0",
+    "description": "Team/Organization adapter for next-auth",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "scripts": {
+        "build": "tsup",
+        "dev": "tsup --watch"
+    },
+    "types": "./dist/index.d.ts",
+    "type": "module",
+    "license": "MIT",
+    "author": "Beka Cru",
+    "files": [
+        "dist",
+        "package.json"
+    ],
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs"
+        }
+    },
+    "dependencies": {
+        "@next-org/core": "workspace:*",
+        "@next-org/react": "workspace:*"
+    },
+    "devDependencies": {
+        "@next-org/tsconfig": "workspace:*",
+        "next": "13.4.12",
+        "next-auth": "^4.22.3",
+        "@next-org/types": "workspace:*"
+    },
+    "peerDependencies": {
+        "next": ">=13.0.0"
+    }
+}

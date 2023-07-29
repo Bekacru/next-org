@@ -1,0 +1,51 @@
+{
+    "name": "@next-org/react",
+    "version": "0.1.0",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "build": "tsup",
+        "dev": "tsup --watch"
+    },
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "require": "./dist/index.cjs",
+            "types": "./dist/index.d.ts"
+        },
+        "./fetch":{
+            "import": "./dist/fetch-client.js",
+            "require": "./dist/fetch-client.cjs",
+            "types": "./dist/fetch-client.d.ts"
+        }
+    },
+    "types": "./dist/index.d.ts",
+    "dependencies": {
+        "@next-org/core": "workspace:*",
+        "@types/react": "^18.2.17",
+        "js-cookie": "^3.0.5"
+    },
+    "devDependencies": {
+        "@types/js-cookie": "^3.0.3",
+        "@next-org/types": "workspace:*",
+        "@types/node": "^16.11.55",
+        "@types/react": "*",
+        "@types/react-dom": "*",
+        "typescript": "*"
+    },
+    "peerDependencies": {
+        "next-auth": ">=4",
+        "react": ">=16"
+    },
+    "engines": {
+        "node": ">=14"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "type": "module",
+    "license": "MIT"
+}

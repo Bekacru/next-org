@@ -1,0 +1,34 @@
+{
+  "name": "@next-org/core",
+  "version": "0.1.0",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "description": "",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "keywords": [],
+  "devDependencies": {
+    "@next-org/tsconfig": "workspace:*",
+    "next-auth": "^4.22.3",
+    "@next-org/types": "workspace:*"
+  },
+  "author": "Beka Cru",
+  "license": "ISC",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@auth/core": "^0.10.0"
+  }
+}

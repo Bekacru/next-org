@@ -1,0 +1,16 @@
+{
+    "name": "@next-org/adapter-test",
+    "description": "Basic test for database adapters",
+    "main": "index.ts",
+    "module": "index.ts",
+    "type": "module",
+    "types": "index.ts",
+    "author": "Beka Cru",
+    "devDependencies": {
+        "@next-org/types": "workspace:*"
+    },
+    "exports": {
+        ".": "./index.ts",
+        "./next-auth": "./next-auth.ts"
+    }
+}

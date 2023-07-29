@@ -1,0 +1,19 @@
+{
+    "name": "@next-org/types",
+    "private": true,
+    "version": "0.0.0",
+    "devDependencies": {
+        "next-auth": "^4.22.3"
+    },
+    "main": "index.ts",
+    "type": "module",
+    "types": "index.ts",
+    "exports": {
+        ".": "./index.ts",
+        "./models": "./models.ts",
+        "./adapters": "./adapters.ts",
+        "./next": {
+            "types": "./next.ts"
+        }
+    }
+}
