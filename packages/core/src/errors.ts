@@ -2,7 +2,6 @@ type ErrorCause = Record<string, unknown>;
 
 export class OrgError extends Error {
     cause?: ErrorCause;
-    // rome-ignore lint/correctness/noUnreachableSuper: <explanation>
     constructor(message: string | Error | ErrorCause, cause?: ErrorCause) {
         if (message instanceof Error) {
             super(undefined);
@@ -29,20 +28,20 @@ export class ConfigurationError extends OrgError {
     }
 }
 
-export class InvalidParameterError extends OrgError {}
+export class InvalidParameterError extends OrgError { }
 
 export class UserNotFoundError extends OrgError {
     constructor() {
         super("user not found!");
     }
 }
-export class UserEmailAndIdNotFoundError extends OrgError {}
-export class MissingAdapter extends OrgError {}
-export class MissingAdapterMethods extends OrgError {}
-export class DuplicatedSlugError extends OrgError {}
-export class DuplicatedUserError extends OrgError {}
-export class MemberNotFound extends OrgError {}
-export class DataValidationError extends OrgError {}
+export class UserEmailAndIdNotFoundError extends OrgError { }
+export class MissingAdapter extends OrgError { }
+export class MissingAdapterMethods extends OrgError { }
+export class DuplicatedSlugError extends OrgError { }
+export class DuplicatedUserError extends OrgError { }
+export class MemberNotFound extends OrgError { }
+export class DataValidationError extends OrgError { }
 
 export const checkRequiredSchema = <T, K extends (keyof T)[]>(data: T, required: K) => {
     if (!data) {

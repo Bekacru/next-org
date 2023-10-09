@@ -4,16 +4,41 @@ import { AuthOptions, User } from "next-auth";
 
 export type OrgOptions = {
     /**
-     * @description a function to send invitation link to user. It'll be called when you call createInvitation with token argument.
+     * a function to send invitation link to user. It'll be called when you call createInvitation with token argument.
+     * * **Required**: *No*
      */
     sendInvitation?: (token: string) => Promise<void>;
+    /**
+     * Organization adapter for your database.
+     *
+     * * **Required**: *No*
+     *
+     */
     adapter: OrgAdapter;
     /**
-     * @default - it'll use getServerSession from next-auth
-     * @description - provide different function to get current user
+     * @default it uses getServerSession from next-auth
+     * @description provide different function to get current user
+     * * **Required**: *No*
      */
     getCurrentUser?: () => Promise<User | undefined>;
+    /**
+     * callback functions for different actions
+     */
     callbacks?: {
+        /**
+         * @description - a callback function to be called when invitation is accepted
+         * @param invitation - invitation object
+         * @param member - member object
+         * @param organization - organization object
+         * * **Required**: *No*
+         * @default - no callback
+         * @example
+         * ```ts
+         * onInvitationAccepted: ({ invitation, member, organization }) => {
+         * console.log("invitation accepted", invitation, member, organization);
+         * }
+         * ```
+         */
         onInvitationAccepted?: ({
             invitation,
             member,
@@ -36,7 +61,7 @@ export type OrgOptions = {
      */
     inviteTokenExpiry?: number;
     /**
-     * @description if you want to check if user is member of organization before performing any action on organization
+     * @description if you want to check if user is member of organization before performing any action on organization.
      */
     checkMembership?: boolean;
     /**
@@ -49,9 +74,30 @@ export type OrgOptions = {
      * "update-member": ["owner", "admin"]
      * "create-member-without-invitation": []
      * "revoke-invitation": ["owner", "admin"]
+     * @example
+     * ```ts
+     * {
+     * "delete-org": ["owner", "admin"],
+     * "update-org": ["owner", "admin"],
+     * "invite-member": ["owner", "admin", "member"],
+     * }
+     * ```
      */
     permissions?: Permissions;
+    /**
+     * various rules for organizations.
+     */
     rules?: Rules;
+    /**
+     * @description if you want to create a personal organization for each user. It'll be created when user sign up.
+     */
+    personalOrganization?: {
+        enable: boolean;
+        /**
+         * @description allow multiple members in personal organization
+         */
+        allowMultipleMembers: boolean;
+    };
 };
 
 export type OrgUser = OrganizationMember & User;
@@ -63,17 +109,21 @@ export type Rules = {
      * @description you can allow owner to leave organizations just needs to defined some extra rules if you do so
      */
     allowOwnersToLeaveOrg?:
-        | {
-              /**
-                 * @description add minimum owners count to allow this
-                 */
-              minOwners?: number;
-              /**
-                 * @default false
-                 */
-              deleteAbandonedOrg: boolean;
-          }
-        | false;
+    | {
+        enable: boolean;
+        /**
+           * @description add minimum owners count to allow this
+           */
+        minOwners?: number;
+        /**
+           * @default false
+           */
+        deleteAbandonedOrg?: boolean;
+    }
+    | false;
+    /**
+     * @description allow multiple owners in organization. By default, it's true.
+     */
     allowMultipleOwners?: boolean;
     /**
      * @default unlimited
@@ -85,11 +135,11 @@ export type Rules = {
      * @description limit the number of active invitations
      */
     maxActiveInvitations?:
-        | number
-        | ((orgId: string) => number)
-        | ((orgId: string) => Promise<number>);
+    | number
+    | ((orgId: string) => number)
+    | ((orgId: string) => Promise<number>);
     /**
-     * @description if you want to delete invitation after it's accepted.
+     * @description if you want to delete invitation after it's accepted from the database.
      * @default false
      */
     deleteInvitationAfterAccept?: boolean;
@@ -134,6 +184,9 @@ export type Handler<
 > = (req: HandlerRequest<T, Q>) => Promise<HandlerResponse>;
 
 export type Options = AuthOptions & {
+    /**
+     * @description options for organization
+     */
     orgOptions: OrgOptions;
 };
 

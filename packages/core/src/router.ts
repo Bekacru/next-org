@@ -1,3 +1,4 @@
+import { Handler } from "@next-org/types";
 import { apiResponse } from "./api-response";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { OrgError } from "./errors";
@@ -18,7 +19,6 @@ import {
     listOrganizations,
     updateOrganization,
 } from "./routes/organization";
-import { Handler } from "@next-org/types";
 
 export const internalRouter: Handler<any, any> = async (req) => {
     const { action } = req;
@@ -37,6 +37,7 @@ export const internalRouter: Handler<any, any> = async (req) => {
                 return await deleteOrganization(req);
             case "org/update":
                 return await updateOrganization(req);
+
             //invitations
             case "org/invitation/create":
                 return await createInvitation(req);

@@ -5,6 +5,10 @@ export type Organization = {
     name: string;
     description: string | null;
     image: string | null;
+    /**
+     * By default, set to "team" unless you enable the "personalOrganization" option in the config. You can change the type to any value you want, but if you set it to "personal", the user won't be able to add more members.
+     */
+    type: string;
     slug: string;
     createdAt: Date;
     updatedAt: Date;

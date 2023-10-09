@@ -57,6 +57,7 @@ model Organization {
     name                   String
     description            String?
     image                  String?
+    type                   String                   @default("team") // By default,set to "team" unless you enable the "personalOrganization" option in the configuration which will make the default personal. You can change the type to any value you want, but if you set it to "personal", the user won't be able to add more members. Ofcourse you can also change that behviour through the config by setting "multipleMembers" true on the "personalOrganization" option.
     createdAt              DateTime                 @default(now())
     updatedAt              DateTime                 @updatedAt
     OrganizationMember     OrganizationMember[]

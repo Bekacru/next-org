@@ -16,6 +16,9 @@ export const createOrganization: Handler<Partial<Organization>> = async ({
     const owner = checkRequiredSchema(user, ["id", "email"]);
     try {
         const createdOrg = await adapter.createOrganization(organization as Organization);
+        if (!createdOrg) {
+            return apiResponse.serverError;
+        }
         const createdOwner = await adapter.createMember({
             orgId: createdOrg.slug,
             email: owner.email as string,
@@ -34,7 +37,6 @@ export const createOrganization: Handler<Partial<Organization>> = async ({
         if (e instanceof DuplicatedSlugError) {
             return apiResponse.duplicatedId;
         }
-        console.error(e);
         return apiResponse.serverError;
     }
 };

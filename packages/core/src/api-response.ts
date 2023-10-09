@@ -22,7 +22,7 @@ export const apiResponse = {
         },
     },
     recordNotFound: {
-        status: 404,
+        status: 200,
         data: {
             error: {
                 message: "Record not found",
